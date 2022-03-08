@@ -17,7 +17,8 @@ jobs:
             aws cloudformation deploy \
             --template aws-instance-scheduler.template \
             --stack << parameters.stack-name >> \
-            --parameter-overrides Regions="us-east-1" StartedTags="startednow" CrossAccountRoles="crossaccountrole" StoppedTags="stopped"        
+            --parameter-overrides Regions="us-east-1" StartedTags="startednow" CrossAccountRoles="crossaccountrole" StoppedTags="stopped" \
+            --capabilities CAPABILITY_NAMED_IAM       
 workflows:
   deploy:
     jobs:
