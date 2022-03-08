@@ -5,7 +5,7 @@ jobs:
   deploy-cfn:
     parameters:
       stack-name:
-        description: My Instance Scheduler
+        description: My-Instance-Scheduler
         type: string
     executor: aws-cli/default
     steps:
@@ -19,6 +19,8 @@ jobs:
             --stack << parameters.stack-name >>         
 workflows:
   deploy:
+    jobs:
     - deploy-cfn:
-        context:
+        context: 
           - aws-personal
+        stack-name: My-Instnace-Scheduler
