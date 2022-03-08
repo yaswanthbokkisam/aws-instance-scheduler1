@@ -1,0 +1,29 @@
+version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@1.4.0
+
+jobs:
+  deploy-cfn:
+    parameters:
+      stack-name:
+        description: My Instance Scheduler
+        type: string
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - aws-cli/setup
+      - run:
+          name: Deploy Cloudformation Template of Instance Scheduler
+          command: |
+            aws cloudformation deploy \
+            --template aws-instance-scheduler.template \
+            --stack << parameters.stack-name >>            
+
+workflows:
+  deploy:
+    - … # create instance scheduler stack in cloudformation
+    - deploy-cfn:
+      context:
+        - aws-personal
+      stack-name: My-Instance-Scheduler
