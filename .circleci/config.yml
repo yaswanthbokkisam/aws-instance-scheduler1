@@ -15,7 +15,7 @@ jobs:
           name: Deploy Cloudformation Template of Instance Scheduler
           command: |
             aws cloudformation deploy \
-            --template aws-instance-scheduler.template \
+            --template cfn/aws-instance-scheduler.template \
             --stack << parameters.stack-name >>         
 workflows:
   deploy:
