@@ -4,8 +4,11 @@ orbs:
 jobs:
   deploy-cfn:
     parameters:
-      stack-name:
+      stack-name1:
         description: My-Instance-Scheduler
+        type: string
+      stack-name2:
+        description: My-Custom-Instance-Schedule
         type: string
     executor: aws-cli/default
     steps:
@@ -16,9 +19,18 @@ jobs:
           command: |
             aws cloudformation deploy \
             --template aws-instance-scheduler.template \
-            --stack << parameters.stack-name >> \
+            --stack << parameters.stack-name1 >> \
             --parameter-overrides Regions="us-east-1" StartedTags="startednow" CrossAccountRoles="crossaccountrole" StoppedTags="stopped" \
+            --capabilities CAPABILITY_NAMED_IAM   
+      - run:
+          name: Enable Custom Schedule
+          command: |
+            aws cloudformation deploy \
+            --template custom-scheduler.template \
+            --stack << parameters.stack-name2 >> \
+            --parameter-overrides StackName=<< parameters.stack-name1 >> \
             --capabilities CAPABILITY_NAMED_IAM       
+      
 workflows:
   deploy:
     jobs:
