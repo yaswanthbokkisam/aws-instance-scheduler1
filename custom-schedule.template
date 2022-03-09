@@ -15,7 +15,7 @@ Resources:
   CTOfficehours:
     Type: 'Custom::ServiceInstanceSchedule'
     Properties:
-      Name: Connecticut-OfficeHours
+      Name: Connecticut-Office-Hours
       NoStackPrefix: 'True'
       Description: Office hours in Connecticut
       ServiceToken:
