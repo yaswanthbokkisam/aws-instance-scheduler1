@@ -1,0 +1,26 @@
+
+AWSTemplateFormatVersion: 2010-09-09 
+Metadata:
+  'AWS::CloudFormation::Designer': {}
+Resources:
+  DutchOfficehours:
+    Type: 'Custom::ServiceInstanceSchedule'
+    Properties:
+      Name: Connecticut-OfficeHours
+      NoStackPrefix: 'True'
+      Description: Office hours in Connecticut
+      ServiceToken: >-
+        arn:aws:lambda:[Region]:[AccountId]:function:[stackName]-InstanceSchedulerMain
+      Enforced: 'True'
+      Hibernate: 'True'
+      Timezone: America/New_York
+      Periods:
+        - Description: Opening hours on weekdays
+          BeginTime: '08:00'
+          EndTime: '18:00'
+          WeekDays: Mon-Fri
+        - Description: Opening hours in weekend
+          BeginTime: '09:00'
+          EndTime: '17:00'
+          WeekDays: Sat-Sun
+  
