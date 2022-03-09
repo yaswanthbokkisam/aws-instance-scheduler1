@@ -18,7 +18,7 @@ Resources:
       Name: Connecticut-OfficeHours
       NoStackPrefix: 'True'
       Description: Office hours in Connecticut
-      ServiceToken: >-
+      ServiceToken:
         !Join
           - ''
           - - 'arn:aws'
