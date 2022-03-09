@@ -2,6 +2,15 @@
 AWSTemplateFormatVersion: 2010-09-09 
 Metadata:
   'AWS::CloudFormation::Designer': {}
+Parameters:
+  Region:
+    Description: Region where the main scheduler stack is run
+    Type: String
+    Default: "us-east-1"
+  StackName:
+    Description: Name of the CloudFormation Stack of the main scheduler
+    Type: String
+    Default: "StackName"
 Resources:
   DutchOfficehours:
     Type: 'Custom::ServiceInstanceSchedule'
@@ -10,7 +19,16 @@ Resources:
       NoStackPrefix: 'True'
       Description: Office hours in Connecticut
       ServiceToken: >-
-        arn:aws:lambda:[Region]:[AccountId]:function:[stackName]-InstanceSchedulerMain
+        !Join
+          - ''
+          - - 'arn:aws'
+            - ':lambda:'
+            - !Ref AWS::Region
+            - ':'
+            - !Ref AWS::AccountId
+            - ':function:'
+            - !Ref StackName
+            - '-InstanceSchedulerMain'
       Enforced: 'True'
       Hibernate: 'True'
       Timezone: America/New_York
