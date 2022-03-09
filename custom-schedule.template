@@ -12,7 +12,7 @@ Parameters:
     Type: String
     Default: "StackName"
 Resources:
-  DutchOfficehours:
+  CT-Officehours:
     Type: 'Custom::ServiceInstanceSchedule'
     Properties:
       Name: Connecticut-OfficeHours
