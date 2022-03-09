@@ -26,7 +26,7 @@ jobs:
           name: Enable Custom Schedule
           command: |
             aws cloudformation deploy \
-            --template custom-scheduler.template \
+            --template custom-schedule.template \
             --stack << parameters.stack-name2 >> \
             --parameter-overrides StackName=<< parameters.stack-name1 >> \
             --capabilities CAPABILITY_NAMED_IAM       
