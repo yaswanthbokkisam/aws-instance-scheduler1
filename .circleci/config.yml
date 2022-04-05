@@ -10,6 +10,9 @@ jobs:
       stack-name2:
         description: My-Custom-Instance-Schedule
         type: string
+      aws-cross-account-roles:
+        description: Cross Account IAM roles that can be assume from the Org Account
+        type: string
     executor: aws-cli/default
     steps:
       - checkout
@@ -20,13 +23,13 @@ jobs:
             aws cloudformation deploy \
             --template aws-instance-scheduler.template \
             --stack << parameters.stack-name1 >> \
-            --parameter-overrides Regions="us-east-1" StartedTags="startednow" CrossAccountRoles="crossaccountrole" StoppedTags="stopped" \
+            --parameter-overrides Regions="us-east-1" StartedTags="startednow" CrossAccountRoles=<< parameters.aws-cross-account-roles >> StoppedTags="stopped" \
             --capabilities CAPABILITY_NAMED_IAM   
       - run:
           name: Enable Custom Schedule
           command: |
             aws cloudformation deploy \
-            --template custom-schedule.template \
+            --template custom-schedule.template \<< parameters.stack-name1 >>
             --stack << parameters.stack-name2 >> \
             --parameter-overrides StackName=<< parameters.stack-name1 >> \
             --capabilities CAPABILITY_NAMED_IAM       
@@ -39,3 +42,4 @@ workflows:
           - aws-personal
         stack-name1: My-Instnace-Scheduler
         stack-name2: My-Custom-Instance-Schedule
+        aws-cross-account-roles: "arn:aws:iam::141550591434:role/AWS-CodePipeline-Service,arn:aws:iam::141550591434:role/service-role/aws-codestar-service-role"
