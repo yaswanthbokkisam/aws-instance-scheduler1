@@ -38,8 +38,8 @@ workflows:
   deploy:
     jobs:
     - deploy-cfn:
-        context: 
-          - aws-personal
+        #context: 
+        #  - aws-personal
         stack-name1: My-Instnace-Scheduler
         stack-name2: My-Custom-Instance-Schedule
         aws-cross-account-roles: "arn:aws:iam::141550591434:role/AWS-CodePipeline-Service,arn:aws:iam::141550591434:role/service-role/aws-codestar-service-role"
