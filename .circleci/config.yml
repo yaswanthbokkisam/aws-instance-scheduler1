@@ -40,4 +40,4 @@ workflows:
     - deploy-cfn:
         stack-name1: My-Instnace-Scheduler
         stack-name2: My-Custom-Instance-Schedule
-        aws-cross-account-roles: "arn:aws:iam::141550591434:role/AWS-CodePipeline-Service,arn:aws:iam::141550591434:role/service-role/aws-codestar-service-role"
+        aws-cross-account-roles: "arn:aws:iam::000000000000:role/cross-account-role,arn:aws:iam::000000000000:role/service-role/cross-account-role2"
