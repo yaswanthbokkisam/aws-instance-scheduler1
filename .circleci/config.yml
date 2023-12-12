@@ -5,10 +5,10 @@ jobs:
   deploy-cfn:
     parameters:
       stack-name1:
-        description: My-Instance-Scheduler
+        description: My-Instance-Scheduler1
         type: string
       stack-name2:
-        description: My-Custom-Instance-Schedule
+        description: My-Custom-Instance-Schedule1
         type: string
       aws-cross-account-roles:
         description: Cross Account IAM roles that can be assume from the Org Account
@@ -38,6 +38,6 @@ workflows:
   deploy:
     jobs:
     - deploy-cfn:
-        stack-name1: My-Instnace-Scheduler
-        stack-name2: My-Custom-Instance-Schedule
+        stack-name1: My-Instnace-Scheduler1
+        stack-name2: My-Custom-Instance-Schedule1
         aws-cross-account-roles: "arn:aws:iam::000000000000:role/cross-account-role,arn:aws:iam::000000000000:role/service-role/cross-account-role2"
